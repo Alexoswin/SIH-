@@ -9,7 +9,10 @@ const employee = require("./employee_register");
 const RehabilitationCenter = require("./RehabilitationCenter");
 const Government = require("./GovernmentInfo")
 const Doctor = require("./newdoctor")
+const DoctorInfo = require("./DoctorInfo");
 const Admin= require("./center_admin")
+const Newsletter = require("./newsletter");
+const Appointment = require("./appointment")
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
@@ -18,6 +21,24 @@ app.get("/", cors(), (req, res) => {
     // Define your root route logic here
     res.json("Welcome to the backend server ");
   });
+
+
+
+  app.get('/alldoctors', async (req, res) => {
+    try {
+      // Fetch all admin records from the 'RehabilitationCenter' collection
+      const adminsData = await Doctor.find({});
+  
+      // Send the retrieved admin data as a response
+      res.json({ admins: adminsData });
+    } catch (error) {
+      // Handle errors
+      res.status(500).json({ error: 'Failed to retrieve admin data' });
+    }
+  });
+  
+  
+  
   app.post("/doctorr", async (req, res) => {
     const {
       name,
@@ -26,7 +47,8 @@ app.get("/", cors(), (req, res) => {
           password,
           doctor_id,
           dob,
-          experience
+          experience,
+          phone
   
   
     } = req.body;
@@ -35,6 +57,7 @@ app.get("/", cors(), (req, res) => {
       name:name,
           number:number,
           email:email,
+          phone:phone,
          
           doctor_id:doctor_id,
           dob:dob,
@@ -58,7 +81,7 @@ app.get("/", cors(), (req, res) => {
         res.json("notexists");
       }
     } catch (e) {
-      res.json("servererror");
+      res.json(e);
     }
   });
   app.post("/Register", async (req, res) => {
@@ -229,6 +252,34 @@ app.post("/login", async (req, res) => {
   }
 });
 
+app.post("/Appointment", async (req, res) => {
+  const {
+    phone,
+    address,
+    date,
+    doctor,
+  } = req.body;
+
+  const data = {
+    phone: phone,
+    address: address,
+    date: date,
+    doctor: doctor
+  };
+
+  try {
+    const check = await Appointment.findOne({ phone: phone });
+    if (check) {
+      res.json("exists");
+    } else {
+      await Appointment.insertMany([data]);
+      res.json("notexists");
+    }
+  } catch (e) {
+    res.json(e);
+  }
+});
+
 
   app.post("/signup", async (req, res) => {
 
@@ -370,11 +421,45 @@ app.get("/substanceCounts", async (req, res) => {
   }
 });
 
+app.get('/alldoctors', async (req, res) => {
+  try {
+    // Fetch all admin records from the 'RehabilitationCenter' collection
+    const adminsData = await DoctorInfo.find({});
+
+    // Send the retrieved admin data as a response
+    res.json({ admins: adminsData });
+  } catch (error) {
+    // Handle errors
+    res.status(500).json({ error: 'Failed to retrieve admin data' });
+  }
+});
+
+app.post('/newsletter', async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    // Check if the email already exists in the newsletter
+    const existingEmail = await Newsletter.findOne({ email });
+    if (existingEmail) {
+      return res.status(400).json({ error: 'Email already exists in the newsletter' });
+    }
+
+    // Create a new Newsletter instance
+    const newSubscriber = new Newsletter({ email });
+
+    // Save the new subscriber to the database
+    await newSubscriber.save();
+
+    res.json({ message: 'Email added to the newsletter successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to add email to the newsletter' });
+  }
+});
 
 
 
 app.listen(8000,()=>{
     console.log("Server listening at port 8000")
 })
-
-
+  

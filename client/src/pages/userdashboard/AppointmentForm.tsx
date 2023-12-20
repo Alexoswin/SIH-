@@ -20,13 +20,13 @@ function User_register() {
     try {
       const response = await axios.get('http://localhost:8000/alldoctors');
       console.log('Response from server:', response.data);
-  
+
       // Assuming response.data.admins is an array of doctors
       const mappedDoctors = response.data.admins.map((doctor) => ({
         id: doctor._id,
-        name: doctor.doctor_name,
+        name: doctor.name,
       }));
-  
+
       setDoctors(mappedDoctors);
     } catch (error) {
       console.error('Error fetching doctors:', error);
@@ -38,8 +38,9 @@ function User_register() {
   }, []);
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    // Handle form submission (e.g., send data to a backend API)
+    e.preventDefault(); // Prevent the default form submission behavior
+    console.log("I was clicked");
+  
     try {
       const response = await axios.post('http://localhost:8000/Appointment', {
         phone,
@@ -47,18 +48,25 @@ function User_register() {
         doctor: selectedDoctor,
         date,
       });
-
+  
       if (response.data === 'exists') {
-        setError(`alredy booked a appointment from ${phone}`);
+        setError(`Already booked an appointment from ${phone}`);
       } else if (response.data === 'notexists') {
         alert(`Successfully registered from ${phone}`);
         setSubmitted(true);
+      } else if (response.data.startsWith('servererror')) {
+        // Handle server error, you might want to log or display an error message
+        console.error('Server error:', response.data);
+      } else {
+        // Handle unexpected response
+        console.error('Unexpected response from server:', response.data);
       }
     } catch (error) {
-      alert('Wrong details');
-      console.error(error);
+      alert('Error submitting appointment');
+      console.error('Error submitting appointment:', error);
     }
   };
+  
 
   useEffect(() => {
     if (submitted) {
@@ -210,30 +218,30 @@ function User_register() {
               <label style={labelStyles}>
                 Doctor:
                 <select
-  required
-  onChange={(e) => setSelectedDoctor(e.target.value)}
->
-  <option disabled hidden>
-    Select Doctor
-  </option>
-  {Doctors.length > 0 ? (
-    Doctors.map((doctor) => (
-      <option key={doctor.id} value={doctor.name}>
-        {doctor.name}
-      </option>
-    ))
-  ) : (
-    <option value="" disabled>
-      Loading Doctors...
-    </option>
-  )}
-</select> 
+                  required
+                  onChange={(e) => setSelectedDoctor(e.target.value)}
+                >
+                  <option disabled hidden>
+                    Select Doctor
+                  </option>
+                  {Doctors.length > 0 ? (
+                    Doctors.map((doctor) => (
+                      <option key={doctor.id} value={doctor.name}>
+                        {doctor.name}
+                      </option>
+                    ))
+                  ) : (
+                    <option value="" disabled>
+                      Loading Doctors...
+                    </option>
+                  )}
+                </select>
               </label>
             </div>
           </div>
 
           {error && <p style={{ color: 'red' }}>{error}</p>}
-          <button  type="submit" style={submitButtonStyles}>
+          <button type="submit" style={submitButtonStyles}>
             Book Appointment
           </button>
         </form>

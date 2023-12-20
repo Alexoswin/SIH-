@@ -3,7 +3,7 @@ import axios from 'axios';
 
 function Doctor_register() {
   const [name, setName] = useState('');
-  const [number, setContact] = useState('');
+  const [phone, setContact] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const[doctor_id, setDoctor_Id]= useState("")
@@ -15,7 +15,7 @@ function Doctor_register() {
     try {
       const response = await axios.post('http://localhost:8000/doctorr', {
         name,
-        number,
+        phone,
         email,
         password,
         doctor_id,
@@ -223,7 +223,7 @@ function Doctor_register() {
                   onChange={(e) => setExperience(e.target.value)}
                   required
                   placeholder="Employee  id "
-                  id="doctor_id"
+                  id="experience"
                   style={inputStyles}
                 />
               </label>
