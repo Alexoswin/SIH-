@@ -1,0 +1,77 @@
+// SurveyForm.scss
+
+.survey-container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: white;
+  border: 1px solid white;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.survey-header {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #007bff;
+}
+
+.question{
+  margin-bottom: 20px;
+  padding-left: 2%;
+}
+
+.question p {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color:#210f35;
+}
+
+.question label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.question input[type="radio"] {
+  margin-right: 5px;
+}
+
+/* Optional: Style radio buttons for better visibility */
+.questioninput[type="radio"]::before {
+  content: '';
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border: 2px solid #333;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: middle;
+  background-color: white;
+}
+
+/* Optional: Style checked radio buttons */
+.question10 input[type="radio"]:checked::before {
+  background-color: #337ab7; /* Change to your desired color */
+  border-color: #337ab7;
+  content: '\2022'; /* Unicode character for a bullet */
+  color: white;
+  text-align: center;
+  line-height: 12px;
+}
+
+
+.submit-button {
+  display: inline-block;
+  padding: 15px 25px;
+  background-color: #dcd4e4;
+  color: #fff;
+  border: #210f35;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #250a3e;
+  }
+}

@@ -19,8 +19,7 @@ const Card = (props) => {
           
           </p>
           {/* Use specific links for each card */}
-          {props.title === 'Patients' && <Link to={patientsLink}><button className='btn btn-outline-success'>View</button></Link>}
-          {props.title === 'Centers' && <Link to={centersLink}><button className='btn btn-outline-success'>View</button></Link>}
+          
         </div>
       </div>
     </div>

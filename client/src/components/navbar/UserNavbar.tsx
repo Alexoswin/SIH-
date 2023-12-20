@@ -14,7 +14,7 @@ const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg">
       <div className="container">
-        <Link className="navbar-brand" to="/">
+        <Link className="navbar-brand" to="/user_landing">
         <img src="logo.svg" alt="" />
         </Link>
         <h1 className="navbar-title">NashaMukti</h1>
@@ -34,7 +34,7 @@ const Navbar = () => {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ml-auto">
             <li className="nav-item">
-              <Link className="nav-link" to="/">
+              <Link className="nav-link" to="/user_landing">
                 Home <FaHome />
               </Link>
             </li>

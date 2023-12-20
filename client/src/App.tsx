@@ -28,6 +28,7 @@ import AdminMap from './pages/adminmap/AdminMap';
 import './styles/global.scss';
 import UserDashboard from './pages/userdashboard/UserDashboard';
 import AppointmentForm from './pages/userdashboard/AppointmentForm';
+import SurveyForm from './pages/userdashboard/SurveyForm';
 
 function App() {
   const Layout = () => {
@@ -58,14 +59,16 @@ function App() {
         { path: '/', element: <Home /> },
         { path: '/patients', element: <Patients /> },
         { path: '/centers', element: <Centers /> },
+        { path: '/centers/:id', element: <Product /> },
         { path: '/patients/:id', element: <Patient /> },
+        { path: '/admin_map', element: <AdminMap /> },
         { path: '/centers/:id', element: <Product /> },
       ],
     },
     { path: '/patient_login', element: <PatientLogin /> },
     { path: '/admin_login', element: <AdminLogin /> },
     { path: '/employee_login', element: <EmployeeLogin /> },
-    { path: '/login_landidng', element: <LoginLanding /> },
+    { path: '/login_landing', element: <LoginLanding /> },
     { path: '/register_laning', element: <RegisterLanding /> },
     { path: '/patient_register', element: <Patient_register /> },
     { path: '/admin_register', element: <Center_register /> },
@@ -77,8 +80,8 @@ function App() {
     { path: '/ContactUs', element: <ContactUs />},
     { path: '/Testimonial', element: <Testimonial />},
     { path: '/AboutUs', element: <AboutUs />},
+    { path: '/surveyform', element: <SurveyForm /> },
     
-    { path: '/admin_map', element: <AdminMap /> },
     { path: '/appointment_form', element: <AppointmentForm /> },
   ]);
 
