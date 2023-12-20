@@ -3,17 +3,19 @@ import axios from 'axios';
 import ChartBox from "../../components/chartBox/ChartBox";
 import PieChartBox from "../../components/pieChartBox/PieChartBox";
 import TopBox from "../../components/topBox/TopBox";
-import BarChartBox from "../../components/barChartBox/BarChartBox";
+
+
 import BigChartBox from "../../components/bigChartBox/BigChartBox";
 import {
-  barChartBoxRelapse,
+ 
   chartBoxCenter,
   chartBoxDoctor,
   chartBoxPatient,
   chartBoxSuccesses,
-  barChartBoxSessions,
+  
 } from "../../data";
 import "./home.scss";
+import LeafletMap from '../userdashboard/LeafletMap';
 
 const GraphDataFetcher = () => {
   
@@ -67,16 +69,25 @@ const Home = () => {
       <div className="box box6">
         <ChartBox {...chartBoxDoctor} number={Tdoctor} />
       </div>
-      <div className="box box7">
-        <BigChartBox/>
-      </div>
-      <div className="box box8">
-        <BarChartBox {...barChartBoxSessions} />
-      </div>
-      <div className="box box9">
-        <BarChartBox {...barChartBoxRelapse} />
+      <div className="box box7" style={{ overflow: 'hidden', height: '400px' }}>
+        {/* Adjust the height according to your design */}
+        <h2>View Locations</h2>
+        <select
+          onChange={(e) => {
+            // Handle the selection logic here
+            console.log('Selected option:', e.target.value);
+          }}
+        >
+          <option value="option1">Option 1</option>
+          <option value="option2">Option 2</option>
+          {/* Add more options as needed */}
+        </select>
+        <LeafletMap style={{ height: '100%' }} />
       </div>
     </div>
+     
+      
+    
   );
 };
 

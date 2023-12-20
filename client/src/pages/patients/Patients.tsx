@@ -19,13 +19,13 @@ const columns: GridColDef[] = [
     width: 150,
   },
   {
-    field: "Number",
+    field: "number",
     type: "string",
     headerName: "Phone",
     width: 150,
   },
   {
-    field: "Address",
+    field: "city",
     type: "string",
     headerName: "Location",
     width: 150,
@@ -41,6 +41,7 @@ const columns: GridColDef[] = [
 const Patients = () => {
   const [patientRows, setPatientRows] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchTerm, setSearchTerm] = useState("");
   const pageSize = 10;
 
   useEffect(() => {
@@ -60,9 +61,23 @@ const Patients = () => {
     setCurrentPage(prevPage => prevPage + 1);
   };
 
+  const prevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(prevPage => prevPage - 1);
+    }
+  };
+
   const startIdx = (currentPage - 1) * pageSize;
   const endIdx = startIdx + pageSize;
-  const displayedPatients = patientRows.slice(startIdx, endIdx);
+
+  const filteredPatients = patientRows.filter(patient =>
+    Object.values(patient).some(value =>
+      value &&
+      value.toString().toLowerCase().startsWith(searchTerm.toLowerCase())
+    )
+  );
+
+  const displayedPatients = filteredPatients.slice(startIdx, endIdx);
 
   return (
     <div className="users">
@@ -71,6 +86,13 @@ const Patients = () => {
         <Link to="/patient_register" className="add-patient-link">
           Add Patients
         </Link>
+        <input
+          type="text"
+          placeholder="Search..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="search-bar"
+        />
       </div>
       <table border={1} width={"100%"}>
         <thead>
@@ -90,7 +112,12 @@ const Patients = () => {
           ))}
         </tbody>
       </table>
-      <button onClick={nextPage}>Next</button>
+      <div>
+        <button onClick={prevPage} disabled={currentPage === 1}>
+          Previous
+        </button>
+        <button onClick={nextPage}>Next</button>
+      </div>
     </div>
   );
 };

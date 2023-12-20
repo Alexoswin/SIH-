@@ -5,10 +5,10 @@ import axios from "axios";
 
 
 interface SubstanceCounts {
-  alcohol: number;
-  drugs: number;
-  tobacco: number;
-  other: number;
+  Alcohol: number;
+  Drugs: number;
+  Tobacco: number;
+  others: number;
 }
 
 const PieChartBox: React.FC = () => {
@@ -29,10 +29,10 @@ const PieChartBox: React.FC = () => {
   }, []);
 
   const data = [
-    { name: "Alcohol", value: piedata?.alcohol ?? 0, color: "#0088FE" },
-    { name: "Drugs", value: piedata?.drugs ?? 0, color: "#00C49F" },
-    { name: "Tobacco", value: piedata?.tobacco ?? 0, color: "#FFBB28" },
-    { name: "Other", value: piedata?.other ?? 0, color: "#FF8042" },
+    { name: "Alcohol", value: piedata?.Alcohol ?? 0, color: "#0088FE" },
+    { name: "Drugs", value: piedata?.Drugs ?? 0, color: "#00C49F" },
+    { name: "Tobacco", value: piedata?.Tobacco ?? 0, color: "#FFBB28" },
+    { name: "Other", value: piedata?.others ?? 0, color: "#FF8042" },
   ];
 
   return (

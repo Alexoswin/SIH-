@@ -1,3 +1,14 @@
-.product{
-    
+
+.product {
+  display: flex; // Use flexbox to display children in a row
+}
+
+.image-section {
+  flex: 0 0 auto; // Ensure the image section does not grow or shrink
+  margin-right: 10px; // Add margin for spacing
+}
+
+.info-section {
+  flex: 1; // Allow the info section to grow and take available space
+  margin-top: 200px;
 }

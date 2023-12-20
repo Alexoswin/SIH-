@@ -412,7 +412,7 @@
   export const singlePatient = {
     id: 1,
     title: "John Doe",
-    img: "https://images.pexels.com/photos/17397364/pexels-photo-17397364.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmr1j1Opl6CGNxQlY-TN09QhayDRSiiYEZNQ&usqp=CAU",
     
     activities: [
       {
@@ -445,7 +445,7 @@
   export const singleCenter = {
     id: 1,
     title: "Playstation 5 Digital Edition",
-    img: "https://store.sony.com.au/on/demandware.static/-/Sites-sony-master-catalog/default/dw1b537bbb/images/PLAYSTATION5W/PLAYSTATION5W.png",
+    img: "",
     info: {
       productId: "Ps5SDF1156d",
       color: "white",

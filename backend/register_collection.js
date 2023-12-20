@@ -53,16 +53,17 @@ const newSchema = new mongoose.Schema({
         type:String,
         require:true,
     },
-    Alcohol:{
-        type:String,
-        require:true,
-    },
     Substance:{
         type:String ,
         require:true,
     },
  
     email:{
+        type:String,
+        require:true,
+    },
+    center:{
+        default:null,
         type:String,
         require:true,
     }

@@ -7,6 +7,7 @@ import "./centers.scss";
 const Centers = () => {
   const [adminRows, setAdminRows] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchTerm, setSearchTerm] = useState("");
   const pageSize = 10;
 
   const columns = [
@@ -30,7 +31,7 @@ const Centers = () => {
       width: 150,
     },
     {
-      field: "address",
+      field: "state",
       type: "string",
       headerName: "Location",
       width: 150,
@@ -41,14 +42,24 @@ const Centers = () => {
       headerName: "City",
       width: 150,
     },
+    {
+      field: "view", // New column for the "View" button
+      headerName: "View",
+      width: 90,
+      renderCell: (params) => (
+        <Link to={`/centers/${params.row._id}`} className="view-button">
+          View
+        </Link>
+      ),
+    },
   ];
 
   useEffect(() => {
     axios
       .get('http://localhost:8000/admindata')
       .then(response => {
-        console.log('Patient Data:', response.data);
-        const adminsArray = response.data.admins || []; // Use 'admins' instead of 'patients'
+        console.log('Admin Data:', response.data);
+        const adminsArray = response.data.admins || [];
         setAdminRows(adminsArray);
       })
       .catch(error => {
@@ -59,10 +70,23 @@ const Centers = () => {
   const nextPage = () => {
     setCurrentPage(prevPage => prevPage + 1);
   };
+  const prevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(prevPage => prevPage - 1);
+    }
+  };
+
 
   const startIdx = (currentPage - 1) * pageSize;
   const endIdx = startIdx + pageSize;
-  const displayedAdmins = adminRows.slice(startIdx, endIdx);
+
+  const filteredAdmins = adminRows.filter(admin =>
+    Object.values(admin).some(value =>
+      value && value.toString().toLowerCase().includes(searchTerm.toLowerCase())
+    )
+  );
+
+  const displayedAdmins = filteredAdmins.slice(startIdx, endIdx);
 
   return (
     <div className="users">
@@ -71,6 +95,13 @@ const Centers = () => {
         <Link to="/admin_register" className="add-patient-link">
           Add Centers
         </Link>
+        <input
+          type="text"
+          placeholder="Search..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="search-bar"
+        />
       </div>
       <table border={1} width={"100%"}>
         <thead>
@@ -84,13 +115,16 @@ const Centers = () => {
           {displayedAdmins.map((admin, index) => (
             <tr key={index}>
               {columns.map(column => (
-                <td key={column.field}>{admin[column.field]}</td>
+                <td key={column.field}>
+                  {column.renderCell ? column.renderCell({ row: admin }) : admin[column.field]}
+                </td>
               ))}
             </tr>
           ))}
         </tbody>
       </table>
       <button onClick={nextPage}>Next</button>
+      <button onClick={prevPage}>Prev</button>
     </div>
   );
 };

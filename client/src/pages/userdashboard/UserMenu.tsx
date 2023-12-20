@@ -12,8 +12,8 @@ const CDBSidebarMenuItem = lazy(() => import('cdbreact').then((module) => ({ def
 const UserMenu = () => {
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <div style={{ display: 'flex', height: '280vh', marginLeft: '0px' }}>
-        <CDBSidebar textColor="#fff" backgroundColor="#333" style={{ height: '280vh' }}>
+      <div style={{ display: 'flex', height: '250vh', marginLeft: '0px' }}>
+        <CDBSidebar textColor="#fff" backgroundColor="#333" style={{ height: '250vh' }}>
           <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
             <a href="/" className="text-decoration-none" style={{ color: 'inherit' }}>
               Sidebar
@@ -22,13 +22,13 @@ const UserMenu = () => {
 
           <CDBSidebarContent className="sidebar-content">
             <CDBSidebarMenu>
-              <NavLink exact to="/" activeClassName="activeClicked">
+              <NavLink exact to="/user_dashboard" activeClassName="activeClicked">
                 <CDBSidebarMenuItem icon="columns">Dashboard</CDBSidebarMenuItem>
               </NavLink>
               <NavLink exact to="/tables" activeClassName="activeClicked">
-                <CDBSidebarMenuItem icon="table">Tables</CDBSidebarMenuItem>
+                <CDBSidebarMenuItem icon="table">View Centers</CDBSidebarMenuItem>
               </NavLink>
-              <NavLink exact to="/profile" activeClassName="activeClicked">
+              <NavLink exact to="/login_landing" activeClassName="activeClicked">
                 <CDBSidebarMenuItem icon="user">Profile page</CDBSidebarMenuItem>
               </NavLink>
               <NavLink exact to="/analytics" activeClassName="activeClicked">

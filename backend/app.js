@@ -98,7 +98,8 @@ app.get("/", cors(), (req, res) => {
       Substance,
       email,
       password,
-      date
+      date,
+      center,
     } = req.body;
   
     const data = {
@@ -113,7 +114,8 @@ app.get("/", cors(), (req, res) => {
       email: email,
       Firstname: Firstname,
       Secondname: Secondname,
-      Date: new Date()
+      date: new Date(),
+      center:center
     };
   
     const data2 = {
@@ -456,6 +458,62 @@ app.post('/newsletter', async (req, res) => {
     res.status(500).json({ error: 'Failed to add email to the newsletter' });
   }
 });
+
+app.get('/center/:id', async (req, res) => {
+  const centerId = req.params.id;
+
+  try {
+    // Fetch center details based on the provided ID
+    const centerData = await Admin.findOne({ _id: centerId });
+
+    // Check if the center exists
+    if (centerData) {
+      // Send the retrieved center data as a response
+      res.json({ center: centerData });
+    } else {
+      // If the center doesn't exist, return an error response
+      res.status(404).json({ error: 'Center not found' });
+    }
+  } catch (error) {
+    // Handle errors
+    console.error('Error fetching center data:', error);
+    res.status(500).json({ error: 'Failed to retrieve center data' });
+  }
+});
+
+app.post('/center', async (req, res) => {
+  const { id } = req.body;
+
+  try {
+    const centerData = await Admin.findOne({ _id: id });
+
+    if (centerData) {
+      res.json({ center: centerData });
+    } else {
+      res.status(404).json({ error: 'Center not found' });
+    }
+  } catch (error) {
+    console.error('Error fetching center data:', error);
+    res.status(500).json({ error: 'Failed to retrieve center data' });
+  }
+});
+
+app.post('/patientsByCenter', async (req, res) => {
+  const { center } = req.body; // Retrieve the 'center' value from the request body
+
+  try {
+    // Fetch patients based on the provided center value
+    const patients = await register.find({ center: center });
+
+    // Send the retrieved patient data as a response
+    res.json({ patients });
+  } catch (error) {
+    // Handle errors
+    console.error('Failed to retrieve patients by center:', error);
+    res.status(500).json({ error: 'Failed to retrieve patients by center' });
+  }
+});
+
 
 
 

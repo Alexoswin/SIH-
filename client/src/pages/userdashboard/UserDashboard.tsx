@@ -20,14 +20,15 @@ const UserDashboard = () => {
           
           <UserIntro />
           <LeafletMap/>
-          <UserTimeline/>
+          
           <AppointmentBooking/>
           <Faq/>
           <Chatbot />
           {/* Add other components as needed */}
-          <Footer/>
+          
         </div>
       </div>
+      <Footer/>
 
       
     </div>

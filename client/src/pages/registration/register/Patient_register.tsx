@@ -5,6 +5,7 @@ import { Navigate } from 'react-router-dom';
 function User_register() {
   const [Firstname, setFirstname] = useState('');
   const [Secondname, setSecondname] = useState('');
+  const [center, setcentername] = useState('');
   const [Age, setAge] = useState('');
   const [Number, setNumber] = useState('');
   const [Address, setAddress] = useState('');
@@ -34,7 +35,8 @@ function User_register() {
         Gender,
         Substance,
         email,
-        password
+        password,
+        center
       });
 
       if (response.data === 'exists') {
@@ -365,6 +367,20 @@ function User_register() {
               </label>
             </div>
           </div>
+          <div style={nameInputStyles}>
+              <label style={labelStyles}>
+                Center Name:
+                <input
+                  type="text"
+                  onChange={(e) => setcentername(e.target.value)}
+                  id="Secondname"
+                  name="Secondname"
+                  required
+                  placeholder="Center Name"
+                  style={inputStyles}
+                />
+              </label>
+            </div>
           {error && <p style={{ color: 'red' }}>{error}</p>}
           <button type="submit" style={submitButtonStyles}>
             Add Patient

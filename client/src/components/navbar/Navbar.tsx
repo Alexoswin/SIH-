@@ -11,13 +11,10 @@ const Navbar = () => {
       </Link>
       <div className="icons">
        
-        <div className="notification">
-          <img src="/notifications.svg" alt="" />
-          <span>1</span>
-        </div>
+
         <Link style={{ color: 'white' }} to="/login_landing" className="user">
           <FaUserAlt />
-          <span style={{ color: 'white' }}>Aryaan</span>
+          
         </Link>
         
       </div>
