@@ -29,6 +29,16 @@ function Employee_register() {
       } else if (response.data === 'notexists') {
         alert('Successfully submitted form');
       }
+      else if (response.data === "invalidname") {
+        alert("invalid name");
+      }
+      else if (response.data === "invalidpassword") {
+        alert("password must be minimum 5 characters");
+      }
+      else if (response.data === "invalidemail") {
+        alert(" enter a valid email id");
+      }
+      
     } catch (error) {
       alert('Wrong details');
       console.error(error);

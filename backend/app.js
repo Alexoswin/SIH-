@@ -165,6 +165,20 @@ app.post("/employee_Register",async(req,res)=>{
           password:password,
           logintype:"employee"
         }
+        const emailRegex = /^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
+        if (!emailRegex.test(email)) {
+          return res.json("invalidemail");
+        }
+      
+        if (!/^[a-zA-Z0-9\s]*$/.test(name) || name.trim().length === 0) {
+          return res.json("invalidname");
+        }
+        
+        
+        if (password.length < 5) {
+          return res.json("invalidpassword");
+        }
+        
 
       try{
           const check = await employee.findOne({employee_Id:employee_Id})
