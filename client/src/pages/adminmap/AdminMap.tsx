@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import { Link } from 'react-router-dom';
+import './AdminMap.scss';
 
 const AdminMap = () => {
   const mapRef = useRef(null);
@@ -98,15 +100,15 @@ const AdminMap = () => {
   }, []); // Run useEffect only once on component mount
 
   return (
-    <div>
-      <h1 style={{ textAlign: 'center' }}>View All Centers</h1>
-      <div id="map" style={{ height: '400px', width: '1000px' }}></div>
-      <div id="filterContainer">
-        <select id="typeFilter">
-          <option value="All">All</option>
-          <option value="Delhi">New Delhi</option> 
-        <option value="West Bengal">KolWest Bengalkata</option> 
-        <option value="Karnataka">Bengaluru</option> 
+    <div className="admin-map-container">
+    <h1 className="map-heading">View All Centers</h1>
+    <div className="filter-container">
+      <label htmlFor="typeFilter">Filter by State:</label>
+      <select id="typeFilter">
+        <option value="All">All</option>
+        <option value="Delhi">New Delhi</option>
+        <option value="West Bengal">Kolkata</option>
+        <option value="Karnataka">Bengaluru</option>
         <option value="Telangana">Hyderabad</option> 
         <option value="Maharashtra">Pune</option> 
         <option value="Chandigarh">Chandigarh</option> 
@@ -124,10 +126,27 @@ const AdminMap = () => {
         <option value="Kerala">Kerala</option> 
         <option value="Madhya Pradesh">Madhya Pradesh</option> 
         <option value="Haryana">Haryana</option> 
-        <option value="Punjab">Punjab</option> 
-        </select>
-      </div>
+        <option value="Punjab">Punjab</option>
+      </select>
     </div>
+    <div id="map" className="map"></div>
+    <Link
+        to="/"
+        style={{
+          position: 'absolute',
+          bottom: '20px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          padding: '10px',
+          backgroundColor: '#007bff',
+          color: '#fff',
+          textDecoration: 'none',
+          borderRadius: '5px',
+        }}
+      >
+        Back
+      </Link>
+  </div>
   );
 };
 

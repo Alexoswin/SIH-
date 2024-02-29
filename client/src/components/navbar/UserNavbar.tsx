@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { FaUser, FaHome } from "react-icons/fa";
+import { FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import "./userNavbar.scss";
 
@@ -15,9 +15,9 @@ const Navbar = () => {
     <nav className="navbar navbar-expand-lg">
       <div className="container">
         <Link className="navbar-brand" to="/">
-        <img src="logo.svg" alt="" />
+          <img src="logo.svg" alt="" />
         </Link>
-        <h1 className="navbar-title">NashaMukti</h1>
+        <h1 className="navbar-title" style={{ textTransform: 'capitalize' }}>nashaMukti</h1>
 
         <button
           className="navbar-toggler"
@@ -34,12 +34,6 @@ const Navbar = () => {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ml-auto">
             <li className="nav-item">
-              <Link className="nav-link" to="/">
-                Home <FaHome />
-              </Link>
-            </li>
-
-            <li className="nav-item">
               <Link className="nav-link" to="/aboutus">
                 About Us
               </Link>
@@ -49,30 +43,7 @@ const Navbar = () => {
                 Contact Us
               </Link>
             </li>
-            <li className="nav-item dropdown">
-              <Link
-                className="nav-link dropdown-toggle"
-                to="#"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Features
-              </Link>
-              <ul className="dropdown-menu">
-                <li>
-                  <Link className="dropdown-item" to="/basketball-court">
-                    Patients
-                  </Link>
-                </li>
-                <li>
-                  <Link className="dropdown-item" to="/football-ground">
-                    Centers
-                  </Link>
-                </li>
-          
-              </ul>
-            </li>
+            
           </ul>
         </div>
 

@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import "./centers.scss";
-// ... (other imports)
 
 const Centers = () => {
   const [adminRows, setAdminRows] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
+  const [locationFilter, setLocationFilter] = useState("All");
+  const [cityFilter, setCityFilter] = useState("All");
   const pageSize = 10;
 
   const columns = [
@@ -43,7 +44,7 @@ const Centers = () => {
       width: 150,
     },
     {
-      field: "view", // New column for the "View" button
+      field: "view",
       headerName: "View",
       width: 90,
       renderCell: (params) => (
@@ -70,17 +71,19 @@ const Centers = () => {
   const nextPage = () => {
     setCurrentPage(prevPage => prevPage + 1);
   };
+
   const prevPage = () => {
     if (currentPage > 1) {
       setCurrentPage(prevPage => prevPage - 1);
     }
   };
 
-
   const startIdx = (currentPage - 1) * pageSize;
   const endIdx = startIdx + pageSize;
 
   const filteredAdmins = adminRows.filter(admin =>
+    (locationFilter === "All" || (admin.state && admin.state.toLowerCase() === locationFilter.toLowerCase())) &&
+    (cityFilter === "All" || (admin.city && admin.city.toLowerCase() === cityFilter.toLowerCase())) &&
     Object.values(admin).some(value =>
       value && value.toString().toLowerCase().includes(searchTerm.toLowerCase())
     )
@@ -88,12 +91,15 @@ const Centers = () => {
 
   const displayedAdmins = filteredAdmins.slice(startIdx, endIdx);
 
+  const locationOptions = Array.from(new Set(adminRows.map(admin => admin.state))).filter(Boolean);
+  const cityOptions = Array.from(new Set(adminRows.map(admin => admin.city))).filter(Boolean);
+
   return (
     <div className="users">
       <div className="info">
         <h1>Center</h1>
         <Link to="/admin_register" className="add-patient-link">
-          Add Centers
+          AddCenter
         </Link>
         <input
           type="text"
@@ -102,6 +108,32 @@ const Centers = () => {
           onChange={(e) => setSearchTerm(e.target.value)}
           className="search-bar"
         />
+        <label htmlFor="locationFilter">Location:</label>
+        <select
+          id="locationFilter"
+          value={locationFilter}
+          onChange={(e) => setLocationFilter(e.target.value)}
+        >
+          <option value="All">All</option>
+          {locationOptions.map((location, index) => (
+            <option key={index} value={location}>
+              {location}
+            </option>
+          ))}
+        </select>
+        <label htmlFor="cityFilter">City:</label>
+        <select
+          id="cityFilter"
+          value={cityFilter}
+          onChange={(e) => setCityFilter(e.target.value)}
+        >
+          <option value="All">All</option>
+          {cityOptions.map((city, index) => (
+            <option key={index} value={city}>
+              {city}
+            </option>
+          ))}
+        </select>
       </div>
       <table border={1} width={"100%"}>
         <thead>

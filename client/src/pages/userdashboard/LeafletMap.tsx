@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import "./leafletmap.scss"
+import './leafletmap.scss'; // Assuming you have a CSS file for additional styles
 
 const LeafletMap = () => {
   const mapRef = useRef(null);
@@ -9,7 +9,7 @@ const LeafletMap = () => {
   // Sample JSON data - replace this with your actual data
   const jsonData = [
     { type: 'Delhi', lat: 28.6139, lng: 77.2090 }, // New Delhi
-        { type: 'Maharashtra', lat: 19.0760, lng: 72.8777 }, // Mumbai
+    { type: 'Maharashtra', lat: 19.0760, lng: 72.8777 }, // Mumbai
         { type: 'West Bengal', lat: 22.5726, lng: 88.3639 }, // Kolkata
         { type: 'Karnataka', lat: 12.9716, lng: 77.5946 }, // Bengaluru
         { type: 'Telangana', lat: 17.3850, lng: 78.4867 }, // Hyderabad
@@ -88,8 +88,8 @@ const LeafletMap = () => {
     });
   };
 
-   // Function to handle location found
-   function onLocationFound(e) {
+  // Function to handle location found
+  function onLocationFound(e) {
     const radius = e.accuracy / 2;
 
     // Change the color of your own location marker
@@ -127,12 +127,13 @@ const LeafletMap = () => {
 
   return (
     <div>
-      <h1 style={{ textAlign: 'center' }}>View All Centers</h1>
-      <div id="map" style={{ height: '400px', width: '1000px' }}></div>
-      <div id="filterContainer">
-        <select id="typeFilter">
-        <option value="All">All</option>
-          <option value="Delhi">New Delhi</option> 
+      <h1 style={{ textAlign: 'center', textTransform: 'none' }}>View All Centers</h1>
+      <div id="map-container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <div id="map" style={{ height: '400px', width: '1000px', marginBottom: '10px' }}></div>
+        <div id="filterContainer">
+          <select id="typeFilter">
+            <option value="All">All</option>
+            <option value="Delhi">New Delhi</option> 
         <option value="West Bengal">KolWest Bengalkata</option> 
         <option value="Karnataka">Bengaluru</option> 
         <option value="Telangana">Hyderabad</option> 
@@ -153,7 +154,8 @@ const LeafletMap = () => {
         <option value="Madhya Pradesh">Madhya Pradesh</option> 
         <option value="Haryana">Haryana</option> 
         <option value="Punjab">Punjab</option> 
-        </select>
+          </select>
+        </div>
       </div>
     </div>
   );

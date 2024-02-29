@@ -16,6 +16,7 @@ type Props = {
 const ChartBox = (props: Props) => {
   const showViewAllLink = Array.isArray(props.chartData) && props.chartData.length > 0;
 
+
   return (
     <div className="chartBox">
       <div className="boxInfo">
@@ -26,7 +27,7 @@ const ChartBox = (props: Props) => {
         <h1>{props.number}</h1>
         {showViewAllLink && (
           // Use the Link component from react-router-dom for redirection
-          <Link to={props.viewAllLink} style={{ color: props.color }}>
+          <Link to={props.viewAllLink} style={{ color: props.color }} disabled={!props.showViewAllButton}>
             View all
           </Link>
         )}
