@@ -9,7 +9,7 @@ const UserLanding = () => {
     <div>
       
       <Intro/>
-      <Cards/>
+      <Cards id="cardsSection"/>
       <hr style={{ display: 'none' }}/>
       <AboutApp/>
       <UserFooter/>

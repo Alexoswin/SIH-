@@ -21,7 +21,7 @@ import Doctor_register from './pages/registration/register/doctor_register';
 import Employee_register from './pages/registration/register/Employee_register';
 import PatientDetails from './pages/patientdetails/PatientDetails';
 import CenterDetails from './pages/centerdetails/CenterDetails';
-
+import Cards from './components/cards/Cards';
 import ContactUs from './NewComponent/ContactUs';
 import Testimonial from './NewComponent/Testimonial' ;
 import AboutUs from './NewComponent/AboutUs';
@@ -67,7 +67,7 @@ function App() {
     { path: '/admin_login', element: <AdminLogin /> },
     { path: '/employee_login', element: <EmployeeLogin /> },
     { path: '/login_landing', element: <LoginLanding /> },
-
+    { path: '/cards', element: <Cards /> },
     { path: '/register_landing', element: <RegisterLanding /> },
     { path: '/doctor_register', element: <Doctor_register />},
     { path: '/patient_register', element: <Patient_register /> },

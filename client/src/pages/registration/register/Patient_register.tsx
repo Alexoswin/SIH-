@@ -65,7 +65,7 @@ function User_register() {
     maxWidth: '700px', // Adjusted maximum width
     width: '90%', // Adjusted width for smaller screens
     backgroundColor: 'rgba(0, 0, 0, 0.7)',
-    maxHeight: '800px', // Increased height of the box
+    maxHeight: '900px', // Increased height of the box
     height: 'auto',
     padding: '30px',
     borderRadius: '20px',

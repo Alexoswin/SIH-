@@ -8,29 +8,21 @@ import UserTimeline from './UserTimeline';
 import AppointmentBooking from './AppointmentBooking';
 import Email from './Email';
 import Footer from './UserFooter';
+import UserNav from './UserNav';
 
 const UserDashboard = () => {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-      <div style={{ display: 'flex' }}>
-        <UserMenu />
-        
-        <div style={{ flex: 1, padding: '20px' }}>
-          {/* Place your components here */}
-          
-          <UserIntro />
-          <LeafletMap/>
-          
-          <AppointmentBooking/>
-          <Faq/>
-          <Chatbot />
-          {/* Add other components as needed */}
-          
-        </div>
+    <div>
+      <UserNav/>
+      <UserIntro />
+      <div style={{ marginTop: '20px' }}>
+        {/* Add some margin between UserIntro and LeafletMap */}
+        <LeafletMap/>
       </div>
+      <AppointmentBooking/>
+      <Faq/>
+      {/* Add other components as needed */}
       <Footer/>
-
-      
     </div>
   );
 }

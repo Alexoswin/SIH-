@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { GridColDef } from "@mui/x-data-grid";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { GridColDef } from "@mui/x-data-grid";
 import "./patients.scss";
 
 const columns: GridColDef[] = [
@@ -42,6 +42,8 @@ const Patients = () => {
   const [patientRows, setPatientRows] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
+  const [locationFilter, setLocationFilter] = useState("All");
+  const [substanceFilter, setSubstanceFilter] = useState("All");
   const pageSize = 10;
 
   useEffect(() => {
@@ -71,20 +73,24 @@ const Patients = () => {
   const endIdx = startIdx + pageSize;
 
   const filteredPatients = patientRows.filter(patient =>
+    (locationFilter === "All" || (patient.city && patient.city.toLowerCase() === locationFilter.toLowerCase())) &&
+    (substanceFilter === "All" || (patient.Substance && patient.Substance.toLowerCase() === substanceFilter.toLowerCase())) &&
     Object.values(patient).some(value =>
-      value &&
-      value.toString().toLowerCase().startsWith(searchTerm.toLowerCase())
+      value && value.toString().toLowerCase().startsWith(searchTerm.toLowerCase())
     )
   );
 
   const displayedPatients = filteredPatients.slice(startIdx, endIdx);
+
+  const locationOptions = Array.from(new Set(patientRows.map(patient => patient.city))).filter(Boolean);
+  const substanceOptions = Array.from(new Set(patientRows.map(patient => patient.Substance))).filter(Boolean);
 
   return (
     <div className="users">
       <div className="info">
         <h1>Patients</h1>
         <Link to="/patient_register" className="add-patient-link">
-          Add Patients
+          AddPatient
         </Link>
         <input
           type="text"
@@ -93,6 +99,32 @@ const Patients = () => {
           onChange={(e) => setSearchTerm(e.target.value)}
           className="search-bar"
         />
+        <label htmlFor="locationFilter">Location:</label>
+        <select
+          id="locationFilter"
+          value={locationFilter}
+          onChange={(e) => setLocationFilter(e.target.value)}
+        >
+          <option value="All">All</option>
+          {locationOptions.map((location, index) => (
+            <option key={index} value={location}>
+              {location}
+            </option>
+          ))}
+        </select>
+        <label htmlFor="substanceFilter">Substance:</label>
+        <select
+          id="substanceFilter"
+          value={substanceFilter}
+          onChange={(e) => setSubstanceFilter(e.target.value)}
+        >
+          <option value="All">All</option>
+          {substanceOptions.map((substance, index) => (
+            <option key={index} value={substance}>
+              {substance}
+            </option>
+          ))}
+        </select>
       </div>
       <table border={1} width={"100%"}>
         <thead>

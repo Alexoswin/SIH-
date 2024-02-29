@@ -33,7 +33,7 @@ const Cards = () => {
       <h2 style={headerStyle}>Features</h2>
       <div className="row">
         <div className="col-md-6">
-          <Card imgsrc={img1} title="Patients" style={{ ...cardStyle, height: '200px' }} />
+          <Card imgsrc={img1} title=" Enroll Patients" style={{ ...cardStyle, height: '200px' }} />
         </div>
         <div className="col-md-6">
           <Card imgsrc={img2} title="Centers" style={{ ...cardStyle, height: '200px' }} />
